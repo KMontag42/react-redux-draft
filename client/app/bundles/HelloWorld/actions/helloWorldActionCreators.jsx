@@ -1,8 +1,8 @@
 import actionTypes from '../constants/helloWorldConstants';
 
-export function updateName(name) {
+export function userConnected(id) {
   return {
-    type: actionTypes.HELLO_WORLD_NAME_UPDATE,
-    name,
+    type: actionTypes.USER_CONNECTED,
+    id
   };
 }

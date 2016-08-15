@@ -3,7 +3,7 @@ import ReactOnRails from 'react-on-rails';
 import { Provider } from 'react-redux';
 
 import createStore from '../store/helloWorldStore';
-import HelloWorld from '../containers/HelloWorld';
+import App from '../containers/App';
 
 // See documentation for https://github.com/reactjs/react-redux.
 // This is how you get props from the Rails view into the redux store.
@@ -14,7 +14,7 @@ const HelloWorldApp = (props, _railsContext) => {
   const store = createStore(props);
   const reactComponent = (
     <Provider store={store}>
-      <HelloWorld />
+      <App />
     </Provider>
   );
   return reactComponent;
