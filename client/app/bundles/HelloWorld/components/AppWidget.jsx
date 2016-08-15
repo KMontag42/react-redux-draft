@@ -10,11 +10,6 @@ import Pick from './Pick';
 
 // Simple example of a React "dumb" component
 export default class extends React.Component {
-  static propTypes = {
-    userConnected: PropTypes.func.isRequired,
-    users: PropTypes.object.isRequired,
-  };
-
   render() {
     return (
       <div className="container-fluid App">

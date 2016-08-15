@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 const DraftHeader = ({users, userConnected}) => (
   <div onClick={userConnected}>
     {users.map(u => {
-      return <p key={u}>{u}</p>;
+      return <span key={u}>{u}</span>;
     })}
   </div>
 );

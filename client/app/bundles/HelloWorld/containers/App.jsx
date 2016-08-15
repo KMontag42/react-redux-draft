@@ -12,7 +12,7 @@ function select(state) {
 }
 
 // Simple example of a React "smart" component
-const HelloWorld = (props) => {
+const App = (props) => {
   const { dispatch, $$helloWorldStore } = props;
   const actions = bindActionCreators(helloWorldActionCreators, dispatch);
   const { userConnected } = actions;
@@ -20,13 +20,13 @@ const HelloWorld = (props) => {
 
   // This uses the ES2015 spread operator to pass properties as it is more DRY
   // This is equivalent to:
-  // <HelloWorldWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
+  // <AppWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
   return (
     <AppWidget {...{ userConnected, users }} />
   );
 };
 
-HelloWorld.propTypes = {
+App.propTypes = {
   dispatch: PropTypes.func.isRequired,
 
   // This corresponds to the value used in function select above.
@@ -37,6 +37,6 @@ HelloWorld.propTypes = {
 };
 
 // Don't forget to actually use connect!
-// Note that we don't export HelloWorld, but the redux "connected" version of it.
+// Note that we don't export App, but the redux "connected" version of it.
 // See https://github.com/reactjs/react-redux/blob/master/docs/api.md#examples
-export default connect(select)(HelloWorld);
+export default connect(select)(App);
