@@ -2,8 +2,10 @@ import React, { PropTypes } from 'react';
 import User from './User';
 
 const DraftHeader = ({connectedUsers, userConnected, makePick, round, nextRound}) => (
-  <div onClick={() => makePick(1,1,round)}>
+  <div>
     <button onClick={nextRound}>Next Round</button>
+    <button onClick={() => makePick(1,1,round)}>Make Pick</button>
+    <br/>
     {connectedUsers.map(u => {
       return <User user={u} key={u}/>;
     })}
