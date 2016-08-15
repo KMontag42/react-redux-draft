@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 
-import actionTypes from '../constants/helloWorldConstants';
+import actionTypes from '../constants/appConstants';
 
 export const $$initialState = Immutable.fromJS({
   users: [], // this is the default state that would be used if one were not passed into the store

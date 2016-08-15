@@ -1,4 +1,4 @@
-import actionTypes from '../constants/helloWorldConstants';
+import actionTypes from '../constants/appConstants';
 
 export function userConnected(id) {
   return {

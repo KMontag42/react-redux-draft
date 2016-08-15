@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { userConnected } from '../actions/helloWorldActionCreators'
+import { userConnected } from '../actions/appActionCreators'
 import DraftHeader from '../components/DraftHeader'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.$$helloWorldStore.get('users')
+    users: state.$$appStore.get('users')
   };
 };
 
