@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default class extends React.Component {
   static propTypes = {
-    number: PropTypes.number.isRequired
+    number: PropTypes.string.isRequired
   };
 
   render() {

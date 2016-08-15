@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => {
     userConnected: (id) => {
       dispatch(userConnected(id));
     },
-    makePick: (userId, contestantId) => {
-      dispatch(makePick(userId, contestantId));
+    makePick: (userId, contestantId, round) => {
+      dispatch(makePick(userId, contestantId, round));
     }
   }
 };

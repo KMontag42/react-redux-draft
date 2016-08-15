@@ -27,11 +27,12 @@ export default function ($$state = $$initialState, action) {
       return $$state.set('participatingUsers', $$state.get('participatingUsers').push(_lastId));
 
     case actionTypes.MAKE_PICK:
-      const { userId, contestantId } = action;
+      const { userId, contestantId, round } = action;
+      console.log(action);
       let newPicks = $$state.get('picks').push({
         userId: userId,
         contestantId: contestantId,
-        round: 1,
+        round: round,
         order: $$state.get('picks').size
       });
       return $$state.set('picks', newPicks);
