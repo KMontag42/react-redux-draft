@@ -15,7 +15,6 @@ export function joinDraft(id) {
 }
 
 export function makePick(userId, contestantId, round) {
-  console.log(round);
   return {
     type: actionTypes.MAKE_PICK,
     userId,

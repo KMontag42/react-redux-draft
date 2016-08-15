@@ -28,7 +28,7 @@ export default function ($$state = $$initialState, action) {
 
     case actionTypes.MAKE_PICK:
       const { userId, contestantId, round } = action;
-      console.log(action);
+
       let newPicks = $$state.get('picks').push({
         userId: userId,
         contestantId: contestantId,
