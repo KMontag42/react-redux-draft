@@ -3,8 +3,8 @@ import User from './User';
 
 const DraftHeader = ({connectedUsers, userConnected, makePick, round, nextRound}) => (
   <div>
-    <button onClick={nextRound}>Next Round</button>
-    <button onClick={() => makePick(1,1,round)}>Make Pick</button>
+    <button onClick={nextRound} className="btn btn-primary">Next Round</button>
+    <button onClick={() => makePick(1,1,round)} className="btn btn-primary">Make Pick</button>
     <br/>
     {connectedUsers.map(u => {
       return <User user={u} key={u}/>;
