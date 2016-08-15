@@ -10,7 +10,8 @@ export const $$initialState = Immutable.fromJS({
     roundTime: 0,
     roundPickOrder: [],
     currentPick: 0
-  }
+  },
+  picks: []
 });
 
 export default function helloWorldReducer($$state = $$initialState, action) {
@@ -24,6 +25,9 @@ export default function helloWorldReducer($$state = $$initialState, action) {
     case actionTypes.JOIN_DRAFT:
       let _lastId = parseInt($$state.get('participatingUsers').last()) + 1;
       return $$state.set('participatingUsers', $$state.get('participatingUsers').push(_lastId));
+
+    case actionTypes.MAKE_PICK:
+      const { }
 
     default:
       return $$state;

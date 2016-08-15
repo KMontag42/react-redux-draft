@@ -6,3 +6,18 @@ export function userConnected(id) {
     id
   };
 }
+
+export function joinDraft(id) {
+  return {
+    type: actionTypes.JOIN_DRAFT,
+    id
+  };
+}
+
+export function makePick(userId, contestantId) {
+  return {
+    type: actionTypes.MAKE_PICK,
+    userId,
+    contestantId
+  };
+}
