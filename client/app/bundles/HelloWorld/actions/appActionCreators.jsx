@@ -22,3 +22,9 @@ export function makePick(userId, contestantId, round) {
     round
   };
 }
+
+export function nextRound() {
+  return {
+    type: actionTypes.NEXT_ROUND
+  }
+}

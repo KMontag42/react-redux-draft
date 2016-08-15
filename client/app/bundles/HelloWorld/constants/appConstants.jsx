@@ -6,7 +6,8 @@ import mirrorCreator from 'mirror-creator';
 const actionTypes = mirrorCreator([
   'USER_CONNECTED',
   'JOIN_DRAFT',
-  'MAKE_PICK'
+  'MAKE_PICK',
+  'NEXT_ROUND'
 ]);
 
 // actionTypes = {HELLO_WORLD_NAME_UPDATE: "HELLO_WORLD_NAME_UPDATE"}

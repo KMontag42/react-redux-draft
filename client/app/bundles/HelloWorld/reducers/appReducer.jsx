@@ -6,7 +6,7 @@ export const $$initialState = Immutable.fromJS({
   connectedUsers: [], // this is the default state that would be used if one were not passed into the store
   participatingUsers: [],
   draft: {
-    currentRound: 0,
+    currentRound: 1,
     roundTime: 0,
     roundPickOrder: [],
     currentPick: 0
@@ -36,6 +36,11 @@ export default function ($$state = $$initialState, action) {
         order: $$state.get('picks').size
       });
       return $$state.set('picks', newPicks);
+
+    case actionTypes.NEXT_ROUND:
+      const currentRound = $$state.get('draft').get('currentRound');
+      const newDraft = $$state.get('draft').set('currentRound', currentRound + 1);
+      return $$state.set('draft', newDraft);
 
     default:
       return $$state;
