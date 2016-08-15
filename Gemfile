@@ -28,6 +28,9 @@ gem 'redis', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'react_on_rails', '~> 6'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+gem 'modernizr-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
