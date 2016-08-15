@@ -7,7 +7,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <span>
+      <span className="pick">
         User: {this.props.pick.userId} | Contestant: {this.props.pick.contestantId}
       </span>
     )

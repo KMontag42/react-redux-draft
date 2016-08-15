@@ -11,7 +11,6 @@ const PickChart = ({picks}) => {
       {_.map( picksByRound, ( (value, key) => {
         return (
           <Round number={key} key={key + 'round'}>
-            <p>{key}</p>
             {value.map( (pick) => {
               return <Pick pick={pick} key={pick.order + 'pick' + pick.round + 'round'}/>
             })}
