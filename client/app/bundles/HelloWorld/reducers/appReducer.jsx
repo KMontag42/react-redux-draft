@@ -34,7 +34,6 @@ export default function ($$state = $$initialState, action) {
         round: 1,
         order: $$state.get('picks').size
       });
-      console.log(newPicks);
       return $$state.set('picks', newPicks);
 
     default:

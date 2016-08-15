@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 
 export default class extends React.Component {
   render() {
-    return <p>Round</p>
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    );
   }
 }
