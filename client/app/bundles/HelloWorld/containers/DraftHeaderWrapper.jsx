@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
-import { userConnected } from '../actions/appActionCreators'
+import { userConnected, makePick } from '../actions/appActionCreators'
 import DraftHeader from '../components/DraftHeader'
 
 const mapStateToProps = (state) => {
   return {
-    connectedUsers: state.$$appStore.get('connectedUsers')
+    connectedUsers: state.$$appStore.get('connectedUsers'),
+    picks: state.$$appStore.get('picks')
   };
 };
 
@@ -12,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     userConnected: (id) => {
       dispatch(userConnected(id));
+    },
+    makePick: (userId, contestantId) => {
+      dispatch(makePick(userId, contestantId));
     }
   }
 };

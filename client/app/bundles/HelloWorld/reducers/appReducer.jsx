@@ -27,7 +27,15 @@ export default function helloWorldReducer($$state = $$initialState, action) {
       return $$state.set('participatingUsers', $$state.get('participatingUsers').push(_lastId));
 
     case actionTypes.MAKE_PICK:
-      const { }
+      const { userId, contestantId } = action;
+      let newPicks = $$state.get('picks').push({
+        userId: userId,
+        contestantId: contestantId,
+        round: 1,
+        order: $$state.get('picks').size
+      });
+      console.log(newPicks);
+      return $$state.set('picks', newPicks);
 
     default:
       return $$state;
