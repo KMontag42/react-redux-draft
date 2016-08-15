@@ -14,7 +14,7 @@ export const $$initialState = Immutable.fromJS({
   picks: []
 });
 
-export default function helloWorldReducer($$state = $$initialState, action) {
+export default function ($$state = $$initialState, action) {
   const { type } = action;
 
   switch (type) {
