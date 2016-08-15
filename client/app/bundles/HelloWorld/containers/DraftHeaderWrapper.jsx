@@ -4,7 +4,7 @@ import DraftHeader from '../components/DraftHeader'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.$$appStore.get('users')
+    connectedUsers: state.$$appStore.get('connectedUsers')
   };
 };
 

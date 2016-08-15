@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react';
+import User from './User';
 
-const DraftHeader = ({users, userConnected}) => (
+const DraftHeader = ({connectedUsers, userConnected}) => (
   <div onClick={userConnected}>
-    {users.map(u => {
-      return <span key={u}>{u}</span>;
+    {connectedUsers.map(u => {
+      return <User user={u} key={u}/>;
     })}
   </div>
 );
 
 DraftHeader.propTypes = {
   userConnected: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired // List
+  connectedUsers: PropTypes.object.isRequired // List
 };
 
 export default DraftHeader
