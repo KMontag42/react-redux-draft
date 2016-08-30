@@ -28,7 +28,7 @@ gem 'redis', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'react_on_rails', '~> 6'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'autoprefixer-rails'
 gem 'modernizr-rails'
 
