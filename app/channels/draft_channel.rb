@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
 class DraftChannel < ApplicationCable::Channel
   def subscribed
-    stream_for current_user
+    stream_from 'draft_channel'
   end
 
   def unsubscribed
@@ -9,7 +9,10 @@ class DraftChannel < ApplicationCable::Channel
   end
 
   def join
-    DraftChannel.broadcast_to(current_user, { type: 'JOIN', data: current_user })
+    d = Draft.all.first
+    d.connected_users = d.connected_users.push(current_user)
+    d.save!
+    ActionCable.server.broadcast 'draft_channel', { type: 'JOIN', data: current_user }
   end
 
   def leave

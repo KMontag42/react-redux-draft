@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815213951) do
+ActiveRecord::Schema.define(version: 20160831175656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20160815213951) do
   end
 
   create_table "drafts", force: :cascade do |t|
-    t.json     "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.json     "state",      default: {"connectedUsers"=>[], "participatingUsers"=>[], "draft"=>{"currentRound"=>1, "roundTime"=>0, "roundPickOrder"=>[], "currentPick"=>0}, "picks"=>[]}
+    t.datetime "created_at",                                                                                                                                                               null: false
+    t.datetime "updated_at",                                                                                                                                                               null: false
   end
 
 end

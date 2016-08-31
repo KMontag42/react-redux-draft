@@ -32,7 +32,7 @@ const AppContainer = (props) => {
         if (data.type == 'JOIN') {
           userConnected(data.data);
         } else if (data.type == 'PICK') {
-          makePick(data.userId, data.contestantId, data.round);
+          makePick(data.data.userId, data.data.contestantId, data.data.round);
         } else if (data.type == 'NEXT_ROUND') {
           nextRound()
         }

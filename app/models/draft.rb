@@ -1,7 +1,15 @@
 class Draft < ApplicationRecord
 
+  def connected_users
+    state.dig('connectedUsers')
+  end
+
+  def connected_users=(val)
+    state['connectedUsers'] = val
+  end
+
   def users
-    state['participatingUsers']
+    state.dig('participatingUsers')
   end
 
   def picks

@@ -1,5 +1,6 @@
 class HelloWorldController < ApplicationController
   def index
-    @hello_world_props = { connectedUsers: [] }
+    d = Draft.all.first
+    @hello_world_props = d.state
   end
 end
