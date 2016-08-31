@@ -5,7 +5,7 @@ class DraftChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # current_user.leave
+    leave
   end
 
   def join
@@ -16,6 +16,10 @@ class DraftChannel < ApplicationCable::Channel
   end
 
   def leave
+    d = Draft.all.first
+    d.connected_users.delete(current_user)
+    d.save!
+    ActionCable.server.broadcast 'draft_channel', { type: 'LEAVE', data: current_user }
   end
 
   def start
