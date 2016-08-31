@@ -26,15 +26,24 @@ class DraftChannel < ApplicationCable::Channel
     d = Draft.all.first
     d.participating_users = d.connected_users
     d.participating_users.shuffle!
+    d.round_pick_order = d.participating_users
     d.save!
-    ActionCable.server.broadcast 'draft_channel', { type: 'START_DRAFT', data: d.participating_users }
+    ActionCable.server.broadcast 'draft_channel', { type: 'START_DRAFT', data: d }
   end
 
   def next_round
-    DraftChannel.broadcast_to(current_user, { type: 'NEXT_ROUND' })
+    d = Draft.all.first
+    d.round_pick_order = d.round_pick_order.reverse
+    d.current_pick = 0
+    d.save!
+    DraftChannel.broadcast_to(current_user, { type: 'NEXT_ROUND', data: d })
   end
 
   def make_pick
-    DraftChannel.broadcast_to(current_user, { type: 'PICK', data: {userId: 1, contestantId: 1, round: 1} })
+    d = Draft.all.first
+    d.picks = d.picks.push({userId: 1, contestantId: 1, round: 1})
+    d.current_pick += 1
+    d.save!
+    ActionCable.server.broadcast 'draft_channel', { type: 'PICK', data: {userId: 1, contestantId: 1, round: 1} }
   end
 end
