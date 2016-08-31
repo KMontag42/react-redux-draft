@@ -4,6 +4,7 @@ import Pick from './Pick';
 import Round from './Round';
 
 const PickChart = ({picks}) => {
+  console.log(picks);
   const picksByRound = _.groupBy( picks.toArray(), (p) => {return p.round;} );
 
   return (

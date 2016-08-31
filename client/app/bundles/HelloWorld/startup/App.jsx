@@ -13,9 +13,6 @@ import AppContainer from '../containers/AppContainer';
 const DraftApp = (props, _railsContext) => {
   const store = createStore(props);
 
-  App = {};
-  App.cable = ActionCable.createConsumer();
-
   const reactComponent = (
     <Provider store={store}>
       <AppContainer />

@@ -13,13 +13,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     userConnected: (id) => {
-      dispatch(userConnected(id));
+      // dispatch(userConnected(id));
     },
     makePick: (userId, contestantId, round) => {
-      dispatch(makePick(userId, contestantId, round));
+      // dispatch(makePick(userId, contestantId, round));
     },
     nextRound: () => {
-      dispatch(nextRound());
+      // dispatch(nextRound());
     }
   }
 };

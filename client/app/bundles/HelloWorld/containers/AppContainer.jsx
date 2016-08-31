@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Immutable from 'immutable';
 import * as appActionCreators from '../actions/appActionCreators';
+import _ from 'underscore';
 
 function select(state) {
   // Which part of the Redux global state does our component want to receive as props?
@@ -15,11 +16,11 @@ function select(state) {
 const AppContainer = (props) => {
   const { dispatch, $$appStore } = props;
   const actions = bindActionCreators(appActionCreators, dispatch);
-  const { userConnected } = actions;
+  const { userConnected, makePick, nextRound } = actions;
   const users = $$appStore.get('users');
 
-  if (typeof App !== 'undefined') {
-    App.draft = App.cable.subscriptions.create("DraftChannel", {
+  if (typeof window.App !== 'undefined' && typeof window.App.draft === 'undefined') {
+    window.App.draft = window.App.cable.subscriptions.create("DraftChannel", {
       connected: function () {
         return this.join();
       },
@@ -28,7 +29,13 @@ const AppContainer = (props) => {
       },
       rejected: function () {},
       received: function (data) {
-        dispatch(userConnected(data.data));
+        if (data.type == 'JOIN') {
+          userConnected(data.data);
+        } else if (data.type == 'PICK') {
+          makePick(data.userId, data.contestantId, data.round);
+        } else if (data.type == 'NEXT_ROUND') {
+          nextRound()
+        }
       },
       join: function () {
         return this.perform('join');
