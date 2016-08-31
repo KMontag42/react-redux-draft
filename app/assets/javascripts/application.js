@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require_tree .
+//= require bootstrap
+//= require cable
 //= require webpack-bundle
+//= require_tree .

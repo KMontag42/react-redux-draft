@@ -13,35 +13,8 @@ import AppContainer from '../containers/AppContainer';
 const DraftApp = (props, _railsContext) => {
   const store = createStore(props);
 
-  if (typeof App !== 'undefined') {
-    App.draft = App.cable.subscriptions.create("DraftChannel", {
-      connected: function () {
-        return this.join();
-      },
-      disconnected: function () {
-        return this.leave();
-      },
-      rejected: function () {},
-      received: function (data) {
-        console.log(data);
-      },
-      join: function () {
-        return this.perform('join');
-      },
-      leave: function () {
-        return this.perform('leave');
-      },
-      start: function () {
-        return this.perform('start');
-      },
-      next_round: function () {
-        return this.perform('next_round');
-      },
-      make_pick: function () {
-        return this.perform('make_pick');
-      }
-    });
-  }
+  App = {};
+  App.cable = ActionCable.createConsumer();
 
   const reactComponent = (
     <Provider store={store}>

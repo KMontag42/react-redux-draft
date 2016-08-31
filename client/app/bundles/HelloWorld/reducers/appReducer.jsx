@@ -19,8 +19,7 @@ export default function ($$state = $$initialState, action) {
 
   switch (type) {
     case actionTypes.USER_CONNECTED:
-      let lastId = parseInt($$state.get('connectedUsers').last()) + 1;
-      return $$state.set('connectedUsers', $$state.get('connectedUsers').push(lastId));
+      return $$state.set('connectedUsers', $$state.get('connectedUsers').push(action.id));
 
     case actionTypes.JOIN_DRAFT:
       let _lastId = parseInt($$state.get('participatingUsers').last()) + 1;
