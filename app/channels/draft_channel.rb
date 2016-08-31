@@ -23,6 +23,11 @@ class DraftChannel < ApplicationCable::Channel
   end
 
   def start
+    d = Draft.all.first
+    d.participating_users = d.connected_users
+    d.participating_users.shuffle!
+    d.save!
+    ActionCable.server.broadcast 'draft_channel', { type: 'START_DRAFT', data: d.participating_users }
   end
 
   def next_round

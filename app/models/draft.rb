@@ -8,8 +8,13 @@ class Draft < ApplicationRecord
     state['connectedUsers'] = val
   end
 
-  def users
+  def participating_users
+    # this is the pick order as well
     state.dig('participatingUsers')
+  end
+
+  def participating_users=(val)
+    state['participatingUsers'] = val
   end
 
   def picks
