@@ -6,9 +6,18 @@ export default class extends React.Component {
   };
 
   render() {
+    const defaultStyle = {
+      width: '140px',
+      height: '210px;',
+      border: '1px solid grey',
+      display: 'inline-block'
+    };
+
+
     return (
-      <span className="pick">
-        User: {this.props.pick.userId} | Contestant: {this.props.pick.contestantId}
+      <span style={defaultStyle}>
+        User: {this.props.pick.get('userId')} <br/>
+        Contestant: {this.props.pick.get('contestantId')}
       </span>
     )
   }
