@@ -6,6 +6,17 @@ export default class extends React.Component {
   };
 
   render() {
-    return <span>{this.props.user}</span>
+    const defaultStyle = {
+      width: '100px',
+      height: '100px',
+      border: '1px solid black',
+      display: 'inline-block'
+    };
+
+    return (
+      <span style={defaultStyle}>
+        {this.props.user}
+      </span>
+    )
   }
 }

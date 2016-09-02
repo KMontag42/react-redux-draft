@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
   return {
     connectedUsers: state.$$appStore.get('connectedUsers'),
     picks: state.$$appStore.get('picks'),
-    round: state.$$appStore.get('draft').get('currentRound')
+    round: state.$$appStore.get('draft').get('currentRound'),
+    currentPick: state.$$appStore.get('draft').get('currentPick')
   };
 };
 

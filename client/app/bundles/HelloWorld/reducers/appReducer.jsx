@@ -34,7 +34,15 @@ export default function ($$state = $$initialState, action) {
         round: round,
         order: $$state.get('picks').size
       });
-      return $$state.set('picks', newPicks);
+
+      const currentPick = $$state.get('draft').get('currentPick');
+
+      $$state.set('picks', newPicks);
+
+      return $$state.withMutations((state) => {
+        state.set('picks', newPicks)
+          .set('draft', $$state.get('draft').set('currentPick', currentPick + 1));
+      });
 
     case actionTypes.NEXT_ROUND:
       const currentRound = $$state.get('draft').get('currentRound');
