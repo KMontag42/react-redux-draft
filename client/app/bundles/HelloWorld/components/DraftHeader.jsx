@@ -8,15 +8,16 @@ const DraftHeader = ({connectedUsers, userConnected, round, currentPick}) => {
     connectedUsers = _.rest(connectedUsers.toArray(), currentPick);
   }
 
+  console.log(round);
+
   return (
     <div>
       <button onClick={() => window.App.draft.next_round()} className="btn btn-primary">Next Round</button>
-      <button onClick={() => window.App.draft.make_pick(1,1,round)} className="btn btn-primary">Make Pick</button>
+      <button onClick={() => window.App.draft.make_pick(1)} className="btn btn-primary">Make Pick</button> {/*contestant id*/}
+      <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
       <br/>
       <UserCarousel>
-        {connectedUsers.map(u => {
-          return <User user={u} key={u}/>;
-        })}
+        {connectedUsers.map(u => <User user={u} key={u}/>)}
       </UserCarousel>
     </div>
   )

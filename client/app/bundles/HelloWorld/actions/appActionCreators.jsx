@@ -1,30 +1,36 @@
 import actionTypes from '../constants/appConstants';
 
-export function userConnected(id) {
+export function userConnected(data) {
   return {
     type: actionTypes.USER_CONNECTED,
-    id
+    data
   };
 }
 
-export function joinDraft(id) {
+export function joinDraft(data) {
   return {
     type: actionTypes.JOIN_DRAFT,
-    id
+    data
   };
 }
 
-export function makePick(userId, contestantId, round) {
+export function makePick(data) {
   return {
     type: actionTypes.MAKE_PICK,
-    userId,
-    contestantId,
-    round
+    data
   };
 }
 
-export function nextRound() {
+export function nextRound(data) {
   return {
-    type: actionTypes.NEXT_ROUND
+    type: actionTypes.NEXT_ROUND,
+    data
+  }
+}
+
+export function startDraft(data) {
+  return {
+    type: actionTypes.START_DRAFT,
+    data
   }
 }

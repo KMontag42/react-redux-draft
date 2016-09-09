@@ -45,4 +45,18 @@ class Draft < ApplicationRecord
     state['picks'].select {|x| x['round'] == round}
   end
 
+  def current_round
+    state.dig('draft', 'currentRound')
+  end
+
+  def current_round=(val)
+    state['draft']['currentRound'] = val
+  end
+
+  def current_user
+    p round_pick_order
+    p current_pick
+    round_pick_order[current_pick]
+  end
+
 end

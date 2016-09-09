@@ -16,7 +16,7 @@ function select(state) {
 const AppContainer = (props) => {
   const { dispatch, $$appStore } = props;
   const actions = bindActionCreators(appActionCreators, dispatch);
-  const { userConnected, makePick, nextRound } = actions;
+  const { userConnected, makePick, nextRound, startDraft } = actions;
   const users = $$appStore.get('users');
 
   if (typeof window.App !== 'undefined' && typeof window.App.draft === 'undefined') {
@@ -30,11 +30,13 @@ const AppContainer = (props) => {
       rejected: function () {},
       received: function (data) {
         if (data.type == 'JOIN') {
-          userConnected(data.data);
+          userConnected(data);
         } else if (data.type == 'PICK') {
-          makePick(data.data.userId, data.data.contestantId, data.data.round);
+          makePick(data);
         } else if (data.type == 'NEXT_ROUND') {
-          nextRound()
+          nextRound(data)
+        } else if (data.type == 'START_DRAFT') {
+          startDraft(data)
         }
       },
       join: function () {
@@ -47,6 +49,7 @@ const AppContainer = (props) => {
         return this.perform('start');
       },
       next_round: function () {
+        console.log('performing next_round');
         return this.perform('next_round');
       },
       make_pick: function () {

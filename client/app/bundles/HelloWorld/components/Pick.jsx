@@ -8,7 +8,7 @@ export default class extends React.Component {
   render() {
     const defaultStyle = {
       width: '140px',
-      height: '210px;',
+      height: '210px',
       border: '1px solid grey',
       display: 'inline-block'
     };

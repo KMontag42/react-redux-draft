@@ -15,39 +15,23 @@ export const $$initialState = Immutable.fromJS({
 });
 
 export default function ($$state = $$initialState, action) {
-  const { type } = action;
+  const { type, data } = action;
 
   switch (type) {
     case actionTypes.USER_CONNECTED:
-      return $$state.set('connectedUsers', $$state.get('connectedUsers').push(action.id));
+      return $$state.merge(data.data.state);
 
     case actionTypes.JOIN_DRAFT:
-      let _lastId = parseInt($$state.get('participatingUsers').last()) + 1;
-      return $$state.set('participatingUsers', $$state.get('participatingUsers').push(_lastId));
+      return $$state.merge(data.data.state);
 
     case actionTypes.MAKE_PICK:
-      const { userId, contestantId, round } = action;
-
-      let newPicks = $$state.get('picks').push({
-        userId: userId,
-        contestantId: contestantId,
-        round: round,
-        order: $$state.get('picks').size
-      });
-
-      const currentPick = $$state.get('draft').get('currentPick');
-
-      $$state.set('picks', newPicks);
-
-      return $$state.withMutations((state) => {
-        state.set('picks', newPicks)
-          .set('draft', $$state.get('draft').set('currentPick', currentPick + 1));
-      });
+      return $$state.merge(data.data.state);
 
     case actionTypes.NEXT_ROUND:
-      const currentRound = $$state.get('draft').get('currentRound');
-      const newDraft = $$state.get('draft').set('currentRound', currentRound + 1);
-      return $$state.set('draft', newDraft);
+      return $$state.merge(data.data.state);
+
+    case actionTypes.START_DRAFT:
+      return $$state.merge(data.data.state);
 
     default:
       return $$state;
