@@ -18,6 +18,9 @@ const AppContainer = (props) => {
   const actions = bindActionCreators(appActionCreators, dispatch);
   const { userConnected, makePick, nextRound, startDraft } = actions;
   const users = $$appStore.get('users');
+  const clientUser = $$appStore.get('clientUser');
+  const draft = $$appStore.get('draft');
+  const currentPick = draft.get('currentPick');
 
   if (typeof window.App !== 'undefined' && typeof window.App.draft === 'undefined') {
     window.App.draft = window.App.cable.subscriptions.create("DraftChannel", {
@@ -53,7 +56,10 @@ const AppContainer = (props) => {
         return this.perform('next_round');
       },
       make_pick: function () {
-        return this.perform('make_pick');
+        if (clientUser.get('id') === draft.get('roundPickOrder').get(currentPick).get('id'))
+          return this.perform('make_pick');
+        else
+          return false;
       }
     });
   }
@@ -62,7 +68,7 @@ const AppContainer = (props) => {
   // This is equivalent to:
   // <AppWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
   return (
-    <AppWidget {...{ userConnected, users }} />
+    <AppWidget {...{ userConnected, users, clientUser }} />
   );
 };
 

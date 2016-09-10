@@ -4,6 +4,6 @@ class HelloWorldController < ApplicationController
 
   def draft
     d = Draft.all.first
-    @hello_world_props = d.state
+    @hello_world_props = d.state.merge({clientUser: current_user.as_json})
   end
 end

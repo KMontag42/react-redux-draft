@@ -46,9 +46,13 @@ class DraftChannel < ApplicationCable::Channel
 
   def make_pick
     d = Draft.all.first
-    d.picks = d.picks.push({userId: d.current_user['username'], contestantId: 1, round: d.current_round, order: d.picks.length})
-    d.current_pick += 1
-    d.save!
-    ActionCable.server.broadcast 'draft_channel', { type: 'PICK', data: d.as_json }
+    if d.current_pick+1 >= d.round_pick_order.length
+      next_round
+    else
+      d.picks = d.picks.push({userId: d.current_user['username'], contestantId: 1, round: d.current_round, order: d.picks.length})
+      d.current_pick += 1
+      d.save!
+      ActionCable.server.broadcast 'draft_channel', { type: 'PICK', data: d.as_json }
+    end
   end
 end

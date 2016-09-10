@@ -11,7 +11,8 @@ export const $$initialState = Immutable.fromJS({
     roundPickOrder: [],
     currentPick: 0
   },
-  picks: []
+  picks: [],
+  clientUser: {}
 });
 
 export default function ($$state = $$initialState, action) {
