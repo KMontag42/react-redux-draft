@@ -32,6 +32,8 @@ gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'autoprefixer-rails'
 gem 'modernizr-rails'
 
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

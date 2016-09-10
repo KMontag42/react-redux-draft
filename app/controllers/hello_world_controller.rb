@@ -1,5 +1,8 @@
 class HelloWorldController < ApplicationController
   def index
+  end
+
+  def draft
     d = Draft.all.first
     @hello_world_props = d.state
   end

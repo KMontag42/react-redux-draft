@@ -8,17 +8,22 @@ const DraftHeader = ({connectedUsers, userConnected, round, currentPick}) => {
     connectedUsers = _.rest(connectedUsers.toArray(), currentPick);
   }
 
-  console.log(round);
+  const style = {
+    height: '110px',
+    border: '1px solid black',
+    paddingTop: '2.5px',
+    paddingLeft: '2.5px'
+  };
 
   return (
-    <div>
-      <button onClick={() => window.App.draft.next_round()} className="btn btn-primary">Next Round</button>
-      <button onClick={() => window.App.draft.make_pick(1)} className="btn btn-primary">Make Pick</button> {/*contestant id*/}
-      <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
-      <br/>
+    <div style={style}>
       <UserCarousel>
         {connectedUsers.map(u => <User user={u} key={u}/>)}
       </UserCarousel>
+      <br/>
+      <button onClick={() => window.App.draft.next_round()} className="btn btn-primary">Next Round</button>
+      <button onClick={() => window.App.draft.make_pick(1)} className="btn btn-primary">Make Pick</button> {/*contestant id*/}
+      <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
     </div>
   )
 };
