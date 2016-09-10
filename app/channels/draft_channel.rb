@@ -10,8 +10,10 @@ class DraftChannel < ApplicationCable::Channel
 
   def join
     d = Draft.all.first
-    d.connected_users = d.connected_users.push(current_user)
-    d.save!
+    if d.round_pick_order.length == 0 && d.connected_users.select {|x| x['id'] == current_user.id}.length == 0
+      d.connected_users = d.connected_users.push(current_user).uniq
+      d.save!
+    end
     ActionCable.server.broadcast 'draft_channel', { type: 'JOIN', data: d.as_json }
   end
 
@@ -24,10 +26,12 @@ class DraftChannel < ApplicationCable::Channel
 
   def start
     d = Draft.all.first
-    d.participating_users = d.connected_users
-    d.participating_users.shuffle!
-    d.round_pick_order = d.participating_users
-    d.save!
+    if d.round_pick_order.length == 0
+      d.participating_users = d.connected_users
+      d.participating_users.shuffle!
+      d.round_pick_order = d.participating_users
+      d.save!
+    end
     ActionCable.server.broadcast 'draft_channel', { type: 'START_DRAFT', data: d.as_json }
   end
 
@@ -42,7 +46,7 @@ class DraftChannel < ApplicationCable::Channel
 
   def make_pick
     d = Draft.all.first
-    d.picks = d.picks.push({userId: d.current_user, contestantId: 1, round: d.current_round, order: d.picks.length})
+    d.picks = d.picks.push({userId: d.current_user['username'], contestantId: 1, round: d.current_round, order: d.picks.length})
     d.current_pick += 1
     d.save!
     ActionCable.server.broadcast 'draft_channel', { type: 'PICK', data: d.as_json }

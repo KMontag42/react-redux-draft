@@ -18,7 +18,7 @@ const DraftHeader = ({connectedUsers, userConnected, round, currentPick}) => {
   return (
     <div style={style}>
       <UserCarousel>
-        {connectedUsers.map(u => <User user={u} key={u}/>)}
+        {connectedUsers.map(u => <User user={u} key={'user'+u.get('id')}/>)}
       </UserCarousel>
       <br/>
       <button onClick={() => window.App.draft.next_round()} className="btn btn-primary">Next Round</button>

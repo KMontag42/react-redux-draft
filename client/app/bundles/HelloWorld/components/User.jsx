@@ -6,6 +6,8 @@ export default class extends React.Component {
   };
 
   render() {
+    const { user } = this.props;
+
     const defaultStyle = {
       width: '100px',
       height: '100px',
@@ -15,7 +17,7 @@ export default class extends React.Component {
 
     return (
       <span style={defaultStyle}>
-        {this.props.user}
+        {user.get('username')}
       </span>
     )
   }
