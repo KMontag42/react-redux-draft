@@ -55,9 +55,14 @@ const AppContainer = (props) => {
         console.log('performing next_round');
         return this.perform('next_round');
       },
-      make_pick: function () {
+      make_pick: function (contestantId) {
+        console.log('currentPick', currentPick);
+        console.log('clientUser',clientUser.get('id'));
+        console.log('roundPickOrder', draft.get('roundPickOrder'));
+        console.log('RPO[currentPick]', draft.get('roundPickOrder').get(currentPick));
+        console.log(draft.get('roundPickOrder').get(currentPick).get('id'));
         if (clientUser.get('id') === draft.get('roundPickOrder').get(currentPick).get('id'))
-          return this.perform('make_pick');
+          return this.perform('make_pick', {contestantId});
         else
           return false;
       }

@@ -1,5 +1,12 @@
 class Draft < ApplicationRecord
 
+  has_many :contestants
+
+  def default_state
+    self.state = {"connectedUsers"=>[], "participatingUsers"=>[], "draft"=>{"currentRound"=>1, "roundTime"=>0, "roundPickOrder"=>[], "currentPick"=>0}, "picks"=>[]}
+    save!
+  end
+
   def connected_users
     state.dig('connectedUsers')
   end
