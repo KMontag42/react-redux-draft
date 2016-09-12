@@ -5,10 +5,11 @@ import _ from 'underscore';
 const UserList = ({connectedUsers, participatingUsers}) => {
 
   const style = {
-    height: '220px',
+    height: '110px',
     border: '1px solid black',
     paddingTop: '2.5px',
-    paddingLeft: '2.5px'
+    paddingLeft: '2.5px',
+    marginTop: '1em'
   };
 
   return (

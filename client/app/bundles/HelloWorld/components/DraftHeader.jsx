@@ -22,12 +22,14 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
     showModal = (clientUser.get('id') === roundPickOrder.get(currentPick).get('id'));
   }
 
+  console.log(roundPickOrder.size);
+
   return (
     <div style={style}>
       <UserCarousel>
         {connectedUsers.map(u => <User user={u} key={'user'+u.get('id')}/>)}
       </UserCarousel>
-      <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
+      {roundPickOrder.size === 0 && <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>}
       {showModal && <ChooseContestant contestants={contestants}/>}
     </div>
   )
