@@ -14,6 +14,13 @@ export function joinDraft(data) {
   };
 }
 
+export function leaveDraft(data) {
+  return {
+    type: actionTypes.LEAVE_DRAFT,
+    data
+  };
+}
+
 export function makePick(data) {
   return {
     type: actionTypes.MAKE_PICK,

@@ -16,11 +16,12 @@ function select(state) {
 const AppContainer = (props) => {
   const { dispatch, $$appStore } = props;
   const actions = bindActionCreators(appActionCreators, dispatch);
-  const { userConnected, makePick, nextRound, startDraft } = actions;
+  const { userConnected, makePick, nextRound, startDraft, leaveDraft } = actions;
   const users = $$appStore.get('users');
   const clientUser = $$appStore.get('clientUser');
-  const draft = $$appStore.get('draft');
-  const currentPick = draft.get('currentPick');
+  const currentPick = $$appStore.get('draft').get('currentPick');
+  const roundPickOrder = $$appStore.get('draft').get('roundPickOrder');
+  console.log(currentPick, roundPickOrder);
 
   if (typeof window.App !== 'undefined' && typeof window.App.draft === 'undefined') {
     window.App.draft = window.App.cable.subscriptions.create("DraftChannel", {
@@ -34,8 +35,18 @@ const AppContainer = (props) => {
       received: function (data) {
         if (data.type == 'JOIN') {
           userConnected(data);
+        } else if (data.type == 'LEAVE') {
+          console.log('player is leaving');
+          console.log(data.data.state.connectedUsers);
+          leaveDraft(data);
         } else if (data.type == 'PICK') {
           makePick(data);
+          const { roundPickOrder, currentPick } = data.data.state.draft;
+          console.log(roundPickOrder, currentPick);
+          if (roundPickOrder[currentPick - 1] && roundPickOrder[currentPick - 1].id == clientUser.get('id') && currentPick >= roundPickOrder.length ) {
+            console.log('doing nextRound');
+            this.perform('next_round');
+          }
         } else if (data.type == 'NEXT_ROUND') {
           nextRound(data)
         } else if (data.type == 'START_DRAFT') {
@@ -52,19 +63,18 @@ const AppContainer = (props) => {
         return this.perform('start');
       },
       next_round: function () {
-        console.log('performing next_round');
         return this.perform('next_round');
       },
       make_pick: function (contestantId) {
-        console.log('currentPick', currentPick);
-        console.log('clientUser',clientUser.get('id'));
-        console.log('roundPickOrder', draft.get('roundPickOrder'));
-        console.log('RPO[currentPick]', draft.get('roundPickOrder').get(currentPick));
-        console.log(draft.get('roundPickOrder').get(currentPick).get('id'));
-        if (clientUser.get('id') === draft.get('roundPickOrder').get(currentPick).get('id'))
-          return this.perform('make_pick', {contestantId});
-        else
+        const clientUser = $$appStore.get('clientUser');
+        const currentPick = $$appStore.get('draft').get('currentPick');
+        const roundPickOrder = $$appStore.get('draft').get('roundPickOrder');
+
+        if ((typeof roundPickOrder.get(currentPick) === 'undefined') || clientUser.get('id') === roundPickOrder.get(currentPick).get('id')) {
+          return this.perform('make_pick', {contestantId: contestantId});
+        } else {
           return false;
+        }
       }
     });
   }

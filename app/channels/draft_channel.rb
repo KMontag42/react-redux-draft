@@ -10,16 +10,14 @@ class DraftChannel < ApplicationCable::Channel
 
   def join
     d = Draft.all.first
-    if d.round_pick_order.length == 0 && d.connected_users.select {|x| x['id'] == current_user.id}.length == 0
-      d.connected_users = d.connected_users.push(current_user).uniq
-      d.save!
-    end
+    d.connected_users = d.connected_users.push(current_user).uniq { |x| x['id'] }
+    d.save!
     ActionCable.server.broadcast 'draft_channel', { type: 'JOIN', data: d.as_json }
   end
 
   def leave
     d = Draft.all.first
-    d.connected_users.delete(current_user)
+    d.connected_users = d.connected_users.delete_if { |x| x['id'] == current_user.id}
     d.save!
     ActionCable.server.broadcast 'draft_channel', { type: 'LEAVE', data: d.as_json }
   end
@@ -45,14 +43,12 @@ class DraftChannel < ApplicationCable::Channel
   end
 
   def make_pick(data)
+    u = Contestant.find(data['contestantId'])
     d = Draft.all.first
-    if d.current_pick+1 >= d.round_pick_order.length
-      next_round
-    else
-      d.picks = d.picks.push({userId: d.current_user['username'], contestantId: data['contestantId'], round: d.current_round, order: d.picks.length})
-      d.current_pick += 1
-      d.save!
-      ActionCable.server.broadcast 'draft_channel', { type: 'PICK', data: d.as_json }
-    end
+    dingus = d.current_round.to_s # cast should make it its own variable ?
+    d.picks = d.picks.push({userId: d.current_user['username'], contestantId: u.name, round: dingus.to_i, order: d.picks.length})
+    d.current_pick += 1
+    d.save!
+    ActionCable.server.broadcast 'draft_channel', { type: 'PICK', data: d.as_json }
   end
 end

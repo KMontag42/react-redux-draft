@@ -6,6 +6,7 @@ import mirrorCreator from 'mirror-creator';
 const actionTypes = mirrorCreator([
   'USER_CONNECTED',
   'JOIN_DRAFT',
+  'LEAVE_DRAFT',
   'MAKE_PICK',
   'START_DRAFT',
   'NEXT_ROUND'

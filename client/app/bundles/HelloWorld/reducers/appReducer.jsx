@@ -20,19 +20,12 @@ export default function ($$state = $$initialState, action) {
 
   switch (type) {
     case actionTypes.USER_CONNECTED:
-      return $$state.merge(data.data.state);
-
     case actionTypes.JOIN_DRAFT:
-      return $$state.merge(data.data.state);
-
+    case actionTypes.LEAVE_DRAFT:
     case actionTypes.MAKE_PICK:
-      return $$state.merge(data.data.state);
-
     case actionTypes.NEXT_ROUND:
-      return $$state.merge(data.data.state);
-
     case actionTypes.START_DRAFT:
-      return $$state.merge(data.data.state);
+      return $$state.mergeDeep(data.data.state);
 
     default:
       return $$state;
