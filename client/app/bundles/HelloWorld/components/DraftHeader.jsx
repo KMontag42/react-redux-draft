@@ -16,7 +16,11 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
     paddingLeft: '2.5px'
   };
 
-  const showModal = (clientUser.get('id') === roundPickOrder.get(currentPick).get('id'));
+  let showModal;
+
+  if (roundPickOrder.get(currentPick)) {
+    showModal = (clientUser.get('id') === roundPickOrder.get(currentPick).get('id'));
+  }
 
   return (
     <div style={style}>

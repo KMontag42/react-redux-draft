@@ -1,6 +1,5 @@
-import { connect } from 'react-redux'
-import { userConnected, makePick, nextRound } from '../actions/appActionCreators'
-import DraftHeader from '../components/DraftHeader'
+import { connect } from 'react-redux';
+import DraftHeader from '../components/DraftHeader';
 
 const mapStateToProps = (state) => {
   return {

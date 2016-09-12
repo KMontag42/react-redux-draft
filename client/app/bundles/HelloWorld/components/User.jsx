@@ -2,11 +2,12 @@ import React, { PropTypes } from 'react';
 
 export default class extends React.Component {
   static defaultPropTypes = {
-    user: PropTypes.string.isRequired
+    user: PropTypes.string.isRequired,
+    online: PropTypes.bool
   };
 
   render() {
-    const { user } = this.props;
+    const { user, online } = this.props;
 
     const defaultStyle = {
       width: '100px',
@@ -15,9 +16,12 @@ export default class extends React.Component {
       display: 'inline-block'
     };
 
+    const isOnline = typeof online !== 'undefined' && online;
+
     return (
       <span style={defaultStyle}>
         {user.get('username')}
+        {isOnline && <div>online</div>}
       </span>
     )
   }
