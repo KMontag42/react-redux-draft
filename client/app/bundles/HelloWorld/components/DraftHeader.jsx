@@ -22,8 +22,6 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
     showModal = (clientUser.get('id') === roundPickOrder.get(currentPick).get('id'));
   }
 
-  console.log(roundPickOrder.size);
-
   return (
     <div style={style}>
       <UserCarousel>
