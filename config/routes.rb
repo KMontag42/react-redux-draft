@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  # mount action cable server
+  mount ActionCable.server => '/cable'
+
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
 
   root 'hello_world#index'
