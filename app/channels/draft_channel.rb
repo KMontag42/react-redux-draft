@@ -22,6 +22,13 @@ class DraftChannel < ApplicationCable::Channel
     ActionCable.server.broadcast 'draft_channel', { type: 'LEAVE', data: d.as_json }
   end
 
+  def end_draft
+    d = Draft.all.first
+    d.current_round = -1
+    d.save!
+    ActionCable.server.broadcast 'draft_channel', { type: 'END', data: d.as_json }
+  end
+
   def start
     d = Draft.all.first
     if d.round_pick_order.length == 0

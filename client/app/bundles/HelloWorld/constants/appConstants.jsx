@@ -7,6 +7,7 @@ const actionTypes = mirrorCreator([
   'USER_CONNECTED',
   'JOIN_DRAFT',
   'LEAVE_DRAFT',
+  'END_DRAFT',
   'MAKE_PICK',
   'START_DRAFT',
   'NEXT_ROUND'

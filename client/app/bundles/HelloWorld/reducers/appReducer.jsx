@@ -22,6 +22,7 @@ export default function ($$state = $$initialState, action) {
     case actionTypes.USER_CONNECTED:
     case actionTypes.JOIN_DRAFT:
     case actionTypes.LEAVE_DRAFT:
+    case actionTypes.END_DRAFT:
     case actionTypes.MAKE_PICK:
     case actionTypes.NEXT_ROUND:
     case actionTypes.START_DRAFT:

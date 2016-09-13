@@ -16,12 +16,14 @@ function select(state) {
 const AppContainer = (props) => {
   const { dispatch, $$appStore } = props;
   const actions = bindActionCreators(appActionCreators, dispatch);
-  const { userConnected, makePick, nextRound, startDraft, leaveDraft } = actions;
+  const { userConnected, makePick, nextRound, startDraft, leaveDraft, endDraft } = actions;
   const users = $$appStore.get('users');
   const clientUser = $$appStore.get('clientUser');
   const currentPick = $$appStore.get('draft').get('currentPick');
+  const currentRound = $$appStore.get('draft').get('currentRound');
   const roundPickOrder = $$appStore.get('draft').get('roundPickOrder');
-  console.log(currentPick, roundPickOrder);
+  const picks = $$appStore.get('picks');
+  const contestants = $$appStore.get('contestants');
 
   if (typeof window.App !== 'undefined' && typeof window.App.draft === 'undefined') {
     window.App.draft = window.App.cable.subscriptions.create("DraftChannel", {
@@ -36,14 +38,17 @@ const AppContainer = (props) => {
         if (data.type == 'JOIN') {
           userConnected(data);
         } else if (data.type == 'LEAVE') {
-          console.log('player is leaving');
-          console.log(data.data.state.connectedUsers);
           leaveDraft(data);
+        } else if (data.type == 'END') {
+          endDraft(data);
         } else if (data.type == 'PICK') {
           makePick(data);
-          const { roundPickOrder, currentPick } = data.data.state.draft;
-          console.log(roundPickOrder, currentPick);
-          if (roundPickOrder[currentPick - 1] && roundPickOrder[currentPick - 1].id == clientUser.get('id') && currentPick >= roundPickOrder.length ) {
+          const { picks, draft } = data.data.state;
+          const { roundPickOrder, currentPick } = draft;
+          const remainingContestants = _.reject(contestants.toArray(), (x) =>  _.some(picks, (y) => y.contestantId === x.get('name')));
+          if (remainingContestants.length == 0) {
+            this.perform('end_draft');
+          } else if (roundPickOrder[currentPick - 1] && roundPickOrder[currentPick - 1].id == clientUser.get('id') && currentPick >= roundPickOrder.length ) {
             console.log('doing nextRound');
             this.perform('next_round');
           }
@@ -83,7 +88,7 @@ const AppContainer = (props) => {
   // This is equivalent to:
   // <AppWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
   return (
-    <AppWidget {...{ userConnected, users, clientUser }} />
+    <AppWidget {...{ currentRound }} />
   );
 };
 
