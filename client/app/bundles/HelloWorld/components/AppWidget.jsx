@@ -15,9 +15,13 @@ export default class AppWidget extends React.Component {
 
     return (
       <div className="container-fluid App">
-        {currentRound != -1 && <DraftHeaderWrapper/>}
-        {currentRound != -1 && <UserListWrapper/>}
-        <PickChartWrapper/>
+        <div className="col-xs-10 col-sm-11">
+          {currentRound != -1 && <DraftHeaderWrapper/>}
+          <PickChartWrapper/>
+        </div>
+        <div className="col-xs-2 col-sm-1">
+          {currentRound != -1 && <UserListWrapper/>}
+        </div>
       </div>
     );
   }

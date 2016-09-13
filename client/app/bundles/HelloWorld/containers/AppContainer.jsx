@@ -49,7 +49,6 @@ const AppContainer = (props) => {
           if (remainingContestants.length == 0) {
             this.perform('end_draft');
           } else if (roundPickOrder[currentPick - 1] && roundPickOrder[currentPick - 1].id == clientUser.get('id') && currentPick >= roundPickOrder.length ) {
-            console.log('doing nextRound');
             this.perform('next_round');
           }
         } else if (data.type == 'NEXT_ROUND') {

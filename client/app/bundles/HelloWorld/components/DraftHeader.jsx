@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 import User from './User';
-import UserCarousel from './UserCarousel';
 import ChooseContestant from './ChooseContestant';
 import _ from 'underscore';
 
 const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roundPickOrder, picks}) => {
-  const restUsers = _.rest(roundPickOrder.toArray(), (currentPick || 0));
+  let restUsers;
+  if (roundPickOrder.toArray().length === 0) {
+    restUsers = connectedUsers.toArray();
+  } else {
+    restUsers = _.rest(roundPickOrder.toArray(), (currentPick || 0));
+  }
 
   const style = {
     height: '220px',
@@ -24,7 +28,6 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
   const remainingContestants = _.reject(contestants.toArray(), (x) => {
     return _.some(picks.toArray(), (y) => y.get('contestantId') === x.get('name'))
   });
-  console.log(remainingContestants);
 
   return (
     <div style={style}>
@@ -32,7 +35,9 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
         const online = _.contains(_.map(connectedUsers.toArray(), (x) => x.get('id')), u.get('id'));
         return <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} displayOnline={true} online={online}/>;
       })}
-      {roundPickOrder.size === 0 && <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>}
+      {roundPickOrder.size === 0 && <div>
+        <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
+      </div>}
       {showModal && <ChooseContestant contestants={remainingContestants}/>}
     </div>
   )

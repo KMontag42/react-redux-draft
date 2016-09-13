@@ -5,15 +5,17 @@ export default class extends React.Component {
     user: PropTypes.string.isRequired,
     online: PropTypes.bool,
     displayOnline: PropTypes.bool,
+    useStyle: PropTypes.bool,
   };
 
   static defaultProps = {
     online: false,
-    displayOnline: false
+    displayOnline: false,
+    useStyle: true
   };
 
   render() {
-    const { user, online, displayOnline } = this.props;
+    const { user, online, displayOnline, useStyle } = this.props;
 
     const defaultStyle = {
       width: '100px',
@@ -23,10 +25,10 @@ export default class extends React.Component {
     };
 
     return (
-      <span style={defaultStyle}>
+      <div style={useStyle ? defaultStyle : {marginTop: '1em'}}>
         {user.get('username')}
         {displayOnline && ((online && <div>Online</div>) || <div>Offline</div>)}
-      </span>
+      </div>
     )
   }
 }

@@ -3,21 +3,11 @@ import User from './User';
 import _ from 'underscore';
 
 const UserList = ({connectedUsers, participatingUsers}) => {
-
-  const style = {
-    height: '110px',
-    border: '1px solid black',
-    paddingTop: '2.5px',
-    paddingLeft: '2.5px',
-    marginTop: '1em',
-    marginBottom: '1em'
-  };
-
   return (
-    <div style={style}>
+    <div>
       {participatingUsers.map(u => {
         const online = _.contains(_.map(connectedUsers.toArray(), (x) => x.get('id')), u.get('id'));
-        return <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} online={online} displayOnline={true}/>
+        return <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} online={online} displayOnline={true} useStyle={false}/>
       })}
     </div>
   )
