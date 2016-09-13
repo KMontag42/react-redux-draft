@@ -28,10 +28,11 @@ export default class ChooseContestant extends Component {
       <div>
         <button onClick={this.toggleModal.bind(this)} className="btn btn-primary" ref='button'>Make Pick</button> {/*contestant id*/}
 
-        <div ref="modal" className="invisible" style={modalStyle}>
+        <div ref="modal" className="invisible row" style={modalStyle}>
           {_.map(contestants, (x) =>
-            <div key={x.get('id')} onClick={() => window.App.draft.make_pick(x.get('id'))}>
+            <div key={x.get('id')} onClick={() => window.App.draft.make_pick(x.get('id'))} className="col-xs-3" style={{cursor: 'pointer'}}>
               {x.get('name')}
+              <img src={x.get('picture')} alt={x.get('name')} className="img-fluid img-rounded"/>
             </div>
           )}
         </div>

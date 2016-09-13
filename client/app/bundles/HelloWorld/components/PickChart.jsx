@@ -3,8 +3,7 @@ import _ from 'underscore';
 import Pick from './Pick';
 import Round from './Round';
 
-const PickChart = ({picks}) => {
-  console.log(picks);
+const PickChart = ({picks, contestants}) => {
   const picksByRound = _.groupBy( picks.toArray(), (p) => p.get('round') );
 
   return (
@@ -13,7 +12,7 @@ const PickChart = ({picks}) => {
         return (
           <Round number={key} key={key + 'round'}>
             {value.map( (pick) => {
-              return <Pick pick={pick} key={pick.get('order') + 'pick' + pick.get('round') + 'round'}/>
+              return <Pick pick={pick} contestants={contestants} key={pick.get('order') + 'pick' + pick.get('round') + 'round'}/>
             })}
           </Round>
         )
@@ -23,7 +22,8 @@ const PickChart = ({picks}) => {
 };
 
 PickChart.propTypes = {
-  picks: PropTypes.object.isRequired
+  picks: PropTypes.object.isRequired,
+  contestants: PropTypes.object.isRequired
 };
 
 export default PickChart;
