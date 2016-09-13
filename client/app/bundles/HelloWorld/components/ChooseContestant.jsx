@@ -3,7 +3,7 @@ import _ from 'underscore';
 
 export default class ChooseContestant extends Component {
   static propTypes = {
-    contestants: PropTypes.object.isRequired
+    contestants: PropTypes.array.isRequired
   };
 
   toggleModal() {
@@ -29,7 +29,7 @@ export default class ChooseContestant extends Component {
         <button onClick={this.toggleModal.bind(this)} className="btn btn-primary" ref='button'>Make Pick</button> {/*contestant id*/}
 
         <div ref="modal" className="invisible" style={modalStyle}>
-          {_.map(contestants.toArray(), (x) =>
+          {_.map(contestants, (x) =>
             <div key={x.get('id')} onClick={() => window.App.draft.make_pick(x.get('id'))}>
               {x.get('name')}
             </div>
