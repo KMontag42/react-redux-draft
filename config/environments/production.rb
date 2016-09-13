@@ -83,4 +83,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # allowed hosts for websockets
+  config.action_cable.allowed_request_origins = %w(https://survivor-draft.herokuapp.com http://survivor-draft.herokuapp.com)
 end
