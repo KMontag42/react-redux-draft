@@ -1,5 +1,8 @@
 class HelloWorldController < ApplicationController
   def index
+    if current_user
+      redirect_to draft_path
+    end
   end
 
   def draft
