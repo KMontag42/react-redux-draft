@@ -5,7 +5,7 @@ import ChooseContestant from './ChooseContestant';
 import _ from 'underscore';
 
 const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roundPickOrder}) => {
-  const restUsers = _.rest(connectedUsers.toArray(), (currentPick || 0));
+  const restUsers = _.rest(roundPickOrder.toArray(), (currentPick || 0));
 
   const style = {
     height: '220px',
@@ -25,7 +25,10 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
 
   return (
     <div style={style}>
-      {restUsers.map(u => <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} displayOnline={false}/>)}
+      {restUsers.map(u => {
+        const online = _.contains(_.map(connectedUsers.toArray(), (x) => x.get('id')), u.get('id'));
+        return <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} displayOnline={true} online={online}/>;
+      })}
       {roundPickOrder.size === 0 && <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>}
       {showModal && <ChooseContestant contestants={contestants}/>}
     </div>
