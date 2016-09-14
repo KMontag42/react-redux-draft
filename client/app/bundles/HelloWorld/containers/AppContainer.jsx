@@ -70,6 +70,9 @@ const AppContainer = (props) => {
         return this.perform('next_round');
       },
       make_pick: function (contestantId) {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').removeClass('in');
+
         const clientUser = $$appStore.get('clientUser');
         const currentPick = $$appStore.get('draft').get('currentPick');
         const roundPickOrder = $$appStore.get('draft').get('roundPickOrder');
