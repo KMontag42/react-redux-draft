@@ -11,14 +11,6 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
     restUsers = _.rest(roundPickOrder.toArray(), (currentPick || 0));
   }
 
-  const style = {
-    height: '220px',
-    border: '1px solid black',
-    paddingTop: '2.5px',
-    paddingLeft: '2.5px',
-    marginTop: '1em'
-  };
-
   let showModal;
 
   if (roundPickOrder.get(currentPick)) {
@@ -30,14 +22,18 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
   });
 
   return (
-    <div style={style}>
-      {restUsers.map(u => {
-        const online = _.contains(_.map(connectedUsers.toArray(), (x) => x.get('id')), u.get('id'));
-        return <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} displayOnline={true} online={online}/>;
-      })}
-      {roundPickOrder.size === 0 && <div>
-        <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
-      </div>}
+    <div className="m-t-1 p-t-1 p-l-1">
+      <div className="row">
+        {restUsers.map(u => {
+          const online = _.contains(_.map(connectedUsers.toArray(), (x) => x.get('id')), u.get('id'));
+          return <User user={u} key={'user'+u.get('id')+(new Date()).getTime()} displayOnline={true} online={online}/>;
+        })}
+      </div>
+      <div className="row">
+        {roundPickOrder.size === 0 && <div>
+          <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
+        </div>}
+      </div>
       {showModal && <ChooseContestant contestants={remainingContestants}/>}
     </div>
   )

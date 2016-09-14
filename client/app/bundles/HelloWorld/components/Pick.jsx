@@ -26,12 +26,12 @@ export default class extends React.Component {
     };
 
     return (
-      <span style={defaultStyle}>
+      <div style={defaultStyle}>
         <div style={divStyle}>
           User: {pick.get('userId')} <br/>
           {pick.get('contestantId')}
         </div>
-      </span>
+      </div>
     )
   }
 }

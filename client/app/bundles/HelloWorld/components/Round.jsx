@@ -6,8 +6,13 @@ export default class extends React.Component {
   };
 
   render() {
+    const style = {
+      width: '' + ((this.props.children.length * 150) + 25) + 'px',
+      height: '140px'
+    };
+
     return (
-      <div>
+      <div style={style}>
         <span>{this.props.number}</span>&nbsp;
         {this.props.children}
       </div>

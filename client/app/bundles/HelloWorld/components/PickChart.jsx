@@ -5,9 +5,11 @@ import Round from './Round';
 
 const PickChart = ({picks, contestants}) => {
   const picksByRound = _.groupBy( picks.toArray(), (p) => p.get('round') );
-
+  const style = {
+    overflowX: 'scroll'
+  };
   return (
-    <div>
+    <div style={style}>
       {_.map( picksByRound, ( (value, key) => {
         return (
           <Round number={key} key={key + 'round'}>

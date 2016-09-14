@@ -18,14 +18,11 @@ export default class extends React.Component {
     const { user, online, displayOnline, useStyle } = this.props;
 
     const defaultStyle = {
-      width: '100px',
-      height: '100px',
-      border: '1px solid black',
-      display: 'inline-block'
+      border: '1px solid black'
     };
 
     return (
-      <div style={useStyle ? defaultStyle : {marginTop: '1em'}}>
+      <div className={useStyle ? 'col-xs-3 col-sm-2 col-lg-1' : ''} style={useStyle ? defaultStyle : {marginTop: '1em'}}>
         {user.get('username')}
         {displayOnline && ((online && <div>Online</div>) || <div>Offline</div>)}
       </div>
