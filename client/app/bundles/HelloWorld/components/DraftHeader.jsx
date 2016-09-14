@@ -30,7 +30,7 @@ const DraftHeader = ({connectedUsers, currentPick, contestants, clientUser, roun
         })}
       </div>
       <div className="row">
-        {roundPickOrder.size === 0 && <div>
+        {roundPickOrder.size === 0 && (clientUser.get("username") === "kyle") && <div>
           <button onClick={() => window.App.draft.start()} className="btn btn-primary">Start</button>
         </div>}
       </div>
