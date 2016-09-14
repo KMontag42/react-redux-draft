@@ -71,7 +71,7 @@ const AppContainer = (props) => {
       },
       make_pick: function (contestantId) {
         $('body').removeClass('modal-open');
-        $('.modal-backdrop').removeClass('in');
+        $('.modal-backdrop').remove();
 
         const clientUser = $$appStore.get('clientUser');
         const currentPick = $$appStore.get('draft').get('currentPick');
